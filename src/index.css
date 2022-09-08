@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.auth-wrapper{
+  position: absolute;
+  top: 50%;
+  border: 5px solid transparent;
+  padding: 10px;
+  text-align: center !important;
+  border: 3px solid;
+  border-radius: 20px;
+  transform: translate(-50% , -50%);
+  left: 50%;
+
+  }
+  .auth-inner{
+    font-size: 14px;
+    margin: 20px;
+    min-width: 350px;
+    width: auto;
+    min-height: 400px;
+    height: auto;
+  }
+
+.userdisplay{
+  font-size: 18px!important;
+  color: white!important;
+    font-weight: 600;
+    padding-right: 15px;
+}
+
+.sort-btn{
+  border: 1px solid;
+  border-radius: 30px;
+  width: 102px;
+}
+.sort-btn:hover{
+  border: 1px solid;
+  border-radius: 30px;
+  width: 120px;
+  
+}
