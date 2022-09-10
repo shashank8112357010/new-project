@@ -8,10 +8,6 @@ import {
     Card,
     CardHeader,
     CardBody,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    UncontrolledDropdown,
     Label,
     FormGroup,
     Input,
@@ -28,10 +24,11 @@ export default function Todo() {
     const [showTask, setshowtask] = useState()
     const [count, setcount] = useState()
     const [countsearch, setcountsearch] = useState()
-
     const [editTask, seteditTask] = useState('')
     const [editTodoData, seteditTodoData] = useState()
     const [resetsearch, setresetsearch] = useState(false)
+    const [check, setCheck] = useState(false)
+    const [completedtodo, setcompletedtodo] = useState([])
 
 
 
@@ -47,7 +44,7 @@ export default function Todo() {
         e.preventDefault()
         var input = document.getElementById("todoinput")
         if (task === undefined) return true
-        axios.post(`http://localhost:3000/tasks`, { task: task }).then((response) => {
+        axios.post(`http://localhost:3000/tasks`, { task: task, status: "pending" }).then((response) => {
             if (response.status == "201") {
                 toast.success("Task added successfully");
                 input.value = null
@@ -84,8 +81,7 @@ export default function Todo() {
             }
         })
     }
-
-    useEffect(() => {
+    const showTaskk = () => {
         axios.get(`http://localhost:3000/tasks`).then((res) => {
 
 
@@ -93,6 +89,9 @@ export default function Todo() {
             temptaskdata = showTask
             setcount(res.data.length)
         })
+    }
+    useEffect(() => {
+        showTaskk()
     }, [editTodoData, count])
 
     const resetSearch = () => {
@@ -112,13 +111,68 @@ export default function Todo() {
         setcountsearch(tempSearchdata.length)
     }
 
-    const sortTask=()=>{
+    const sortTask = () => {
         axios.get(`http://localhost:3000/tasks?_sort=task&_order=accending`).then((res) => {
             setshowtask(res.data)
             temptaskdata = showTask
         })
     }
+    const checked = (item, e) => {
+        let tempData = completedtodo
+        if (e.target.checked) {
+            tempData.push(item)
+        }
+        else if (!e.target.checked) {
+            let temp = tempData.filter((x) => {
+                return x.id !== item.id
+            })
+            console.log("temp", temp);
+            tempData = temp
+        }
+        console.log("completedtodo=====>", tempData)
 
+        if (tempData.length > 0) {
+            setCheck(true)
+        }
+        else setCheck(false)
+
+        setcompletedtodo(tempData)
+    }
+
+    const markasDone = () => {
+        completedtodo.forEach(async (item) => {
+            if(item.status==="pending"){
+            try {
+                const res = await axios.patch(`http://localhost:3000/tasks/${item.id}`, {
+                    status: "completed"
+                });
+                if (res.status === 200) {
+                    toast.success("task Completed");
+                    showTaskk()
+                    document.getElementById(item.id).checked = false
+                    // setcompletedtodo([])
+                }
+            } catch (err) {
+                toast.error("something went wrong");
+            }
+        }
+        else if(item.status==="completed") toast.error("Already marked ")
+
+        })
+
+    }
+    const DeteteAll= () => {
+        completedtodo.forEach(async (item) => {
+            axios.delete(`http://localhost:3000/tasks/${item.id}`).then((res) => {
+            if (res.status) {
+                setcount()
+               
+                return true
+            }
+        })
+        })
+        toast.success("Task deleted successfully")
+        }
 
     return (
         <div className="content">
@@ -138,20 +192,46 @@ export default function Todo() {
                     <Card className="card-tasks">
                         <CardHeader>
                             <Row>
-                                <Col lg={2}>
-                                    <Button
-                                    className='sort-btn'
-                                        color="link"
-                                        type="button"
-                                        onClick={e=>sortTask()}
-                                    >
-                                        Sort
-                                    </Button>
-                                </Col>
-                                <Col lg={6} className=" ms-5">
+                                <Col className=" ms-5">
                                     <h4 className="title d-inline">Tasks({resetsearch ? countsearch : count})</h4>
                                 </Col>
-                                <Col lg={4} className="d-flex justify-content-end">
+                                <Col >
+                                    {check ?
+                                        <>
+
+                                            <Button
+                                                className='sort-btn'
+                                                style={{ color: "white" }}
+                                                color="link"
+                                                type="button"
+                                                onClick={e => markasDone()}
+                                            >
+                                                Mark done
+                                            </Button>
+                                            <Button
+                                                className='sort-btn'
+                                                style={{ color: "white" }}
+                                                color="link"
+                                                type="button"
+                                                onClick={e => DeteteAll()}
+                                            >
+                                                Detete All
+                                            </Button>
+                                        </>
+                                        :
+                                        <Button
+                                            className='sort-btn'
+                                            style={{ color: "white" }}
+                                            color="link"
+                                            type="button"
+                                            onClick={e => sortTask()}
+                                        >
+                                            Sort
+                                        </Button>
+                                    }
+                                </Col>
+
+                                <Col className="d-flex justify-content-end">
                                     <Input type='text' id='inputsearch' placeholder='Search Tasks.....' onChange={(e) => { searchTasks(e); setresetsearch(true) }} />
                                     {resetsearch && <Button style={{ marginLeft: "-50px", marginTop: "1px" }} onClick={() => resetSearch()} color="link" type='button'><i className='tim-icons icon-simple-remove' /></Button>}
                                 </Col>
@@ -171,13 +251,13 @@ export default function Todo() {
                                         )}
                                         {showTask && showTask.map((item) => {
                                             return (
-                                                <tr key={item.id}>
-                                                    <td>
+                                                <tr key={item.id} className="">
+                                                    <td className='w-25'>
                                                         <FormGroup check>
                                                             <Label check>
                                                                 {(editTask !== item.id) &&
                                                                     <>
-                                                                        <Input defaultValue="" type="checkbox" />
+                                                                        <Input defaultValue="" id={item.id} type="checkbox" onClick={(e) => checked(item, e)} />
                                                                         <span className="form-check-sign">
                                                                             <span className="check" />
                                                                         </span>
@@ -186,7 +266,7 @@ export default function Todo() {
                                                             </Label>
                                                         </FormGroup>
                                                     </td>
-                                                    <td>
+                                                    <td >
                                                         {
                                                             editTask === item.id ? (
                                                                 <Input type="text"
@@ -195,13 +275,22 @@ export default function Todo() {
                                                                     onChange={(e) => seteditTodoData(e.target.value)}
                                                                 />
                                                             ) : (
-                                                                <p className="text-muted ">
+                                                                <p className="text-muted ms-5 ">
                                                                     {item.task}
                                                                 </p>
                                                             )
                                                         }
                                                     </td>
-                                                    <td className="td-actions text-right">
+                                                    <td>
+
+                                                        {(editTask !== item.id) &&
+                                                            <>
+
+                                                                <p className={item.status === "pending" ? 'pending' : 'text-success'}>{item.status}</p>
+                                                            </>
+                                                        }
+                                                    </td>
+                                                    <td className="td-actions text-right w-50">
                                                         {editTask === item.id ? (
                                                             <>
                                                                 <Button
@@ -225,6 +314,7 @@ export default function Todo() {
                                                                     color="link"
                                                                     id="edit"
                                                                     type="button"
+                                                                    disabled={check}
                                                                     onClick={() => edit(item)}
                                                                 >
                                                                     <i className="tim-icons icon-pencil text-success" />
@@ -240,6 +330,7 @@ export default function Todo() {
                                                                     color="link"
                                                                     id="delete"
                                                                     type="button"
+                                                                    disabled={check}
                                                                     onClick={e => deleteTodo(item.id)}
                                                                 >
 

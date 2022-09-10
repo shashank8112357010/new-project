@@ -36,6 +36,7 @@ code {
   font-size: 18px!important;
   color: white!important;
     font-weight: 600;
+    font-size: 12px;
     padding-right: 15px;
 }
 
@@ -43,10 +44,15 @@ code {
   border: 1px solid;
   border-radius: 30px;
   width: 102px;
+  font-size: 12px;
+
 }
 .sort-btn:hover{
   border: 1px solid;
   border-radius: 30px;
-  width: 120px;
+  font-size: 13px;
   
+}
+.pending{
+  color: yellow !important;;
 }
