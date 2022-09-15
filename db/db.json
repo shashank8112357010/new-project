@@ -1,0 +1,293 @@
+{
+  "users": [
+    {
+      "username": "Shashank",
+      "password": "Shashank@123",
+      "email": "shashank@gmail.com",
+      "firstName": "Shashank",
+      "lastName": "Sharma",
+      "address": "Lucknow",
+      "city": "Rajkot",
+      "country": "Indiasssssss",
+      "about": "test",
+      "id": 1
+    },
+    {
+      "username": "aa",
+      "password": "A@123456",
+      "email": "a@gmail.com",
+      "firstName": "ddasd",
+      "lastName": "a",
+      "address": "ascasc",
+      "city": "acaca",
+      "country": "acaS",
+      "about": "Cacsascd",
+      "id": 2
+    },
+    {
+      "username": "Mayank  123",
+      "password": "mayank123@",
+      "email": "Mayank@gmail.com",
+      "firstName": "Mayank",
+      "lastName": "Saxena",
+      "address": "Pratapgarh",
+      "city": "pratapgarh",
+      "country": "India",
+      "about": "Fucused",
+      "id": 3
+    },
+    {
+      "username": "Shashank",
+      "password": "Shashank@12345",
+      "email": "Shashank@gmail.com",
+      "phone": "",
+      "id": 4
+    },
+    {
+      "username": "Divanshu",
+      "password": "@123devanshu",
+      "email": "Dvanshu@gmail.com",
+      "phone": "",
+      "id": 5
+    },
+    {
+      "username": "manya",
+      "password": "manya@12345",
+      "email": "manya@gmail.com",
+      "phone": "9616577509",
+      "id": 6
+    }
+  ],
+  "chartdata": [
+    {
+      "id": 1,
+      "labels": [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ],
+      "datasets": [
+        {
+          "label": "My First dataset",
+          "fill": true,
+          "backgroundColor": "rgba(29,140,248,0.0)",
+          "borderColor": "#1f8ef1",
+          "borderWidth": 2,
+          "borderDash": [],
+          "borderDashOffset": 0,
+          "pointBackgroundColor": "#1f8ef1",
+          "pointBorderColor": "rgba(255,255,255,0)",
+          "pointHoverBackgroundColor": "#1f8ef1",
+          "pointBorderWidth": 20,
+          "pointHoverRadius": 4,
+          "pointHoverBorderWidth": 15,
+          "pointRadius": 4,
+          "data": [
+            100,
+            70,
+            90,
+            100,
+            85,
+            60,
+            75,
+            60,
+            90,
+            80,
+            110,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "labels": [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC"
+      ],
+      "datasets": [
+        {
+          "label": "My First dataset",
+          "fill": true,
+          "borderColor": "#1f8ef1",
+          "borderWidth": 2,
+          "borderDash": [],
+          "borderDashOffset": 0,
+          "pointBackgroundColor": "#1f8ef1",
+          "pointBorderColor": "rgba(255,255,255,0)",
+          "pointHoverBackgroundColor": "#1f8ef1",
+          "pointBorderWidth": 20,
+          "pointHoverBorderWidth": 15,
+          "pointRadius": 4,
+          "data": [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            60,
+            50,
+            40,
+            30,
+            20,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "datasets": [
+        {
+          "label": "My First dataset",
+          "fill": true,
+          "borderColor": "#1f8ef1",
+          "borderWidth": 2,
+          "borderDash": [],
+          "borderDashOffset": 0,
+          "pointBackgroundColor": "#1f8ef1",
+          "pointBorderColor": "rgba(255,255,255,0)",
+          "pointHoverBackgroundColor": "#1f8ef1",
+          "pointBorderWidth": 20,
+          "pointHoverRadius": 4,
+          "pointHoverBorderWidth": 15,
+          "pointRadius": 4,
+          "data": [
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120,
+            130
+          ]
+        }
+      ]
+    }
+  ],
+  "chart_options": [
+    {
+      "maintainAspectRatio": false,
+      "legend": {
+        "display": false
+      },
+      "tooltips": {
+        "backgroundColor": "#f5f5f5",
+        "titleFontColor": "#333",
+        "bodyFontColor": "#666",
+        "bodySpacing": 4,
+        "xPadding": 12,
+        "mode": "nearest",
+        "intersect": 0,
+        "position": "nearest"
+      },
+      "responsive": true,
+      "scales": {
+        "yAxes": [
+          {
+            "barPercentage": 1.6,
+            "gridLines": {
+              "drawBorder": false,
+              "color": "rgba(29,140,248,0.0)",
+              "zeroLineColor": "transparent"
+            },
+            "ticks": {
+              "suggestedMin": 60,
+              "suggestedMax": 125,
+              "padding": 20,
+              "fontColor": "#9a9a9a"
+            }
+          }
+        ],
+        "xAxes": [
+          {
+            "barPercentage": 1.6,
+            "gridLines": {
+              "drawBorder": false,
+              "color": "rgba(29,140,248,0.1)",
+              "zeroLineColor": "transparent"
+            },
+            "ticks": {
+              "padding": 20,
+              "fontColor": "#9a9a9a"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "barchartdata": [
+    {
+      "labels": [
+        "USA",
+        "GER",
+        "AUS",
+        "UK",
+        "RO",
+        "BR"
+      ],
+      "datasets": [
+        {
+          "label": "Countries",
+          "fill": true,
+          "backgroundColor": "rgba(119,52,169,0)",
+          "hoverBackgroundColor": "rgba(119,52,169,0)",
+          "borderColor": "#d048b6",
+          "borderWidth": 2,
+          "borderDash": [],
+          "borderDashOffset": 0,
+          "data": [
+            53,
+            20,
+            10,
+            80,
+            100,
+            45
+          ]
+        }
+      ]
+    }
+  ],
+  "tasks": []
+}

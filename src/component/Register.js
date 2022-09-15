@@ -21,12 +21,7 @@ let initialdata = {
     username: "",
     password: "",
     email: "",
-    firstName: "",
-    lastName: "",
-    address: "",
-    city: "",
-    country: "",
-    about: ""
+    phoneno: "",  
 }
 function SignUp() {
     const [userData, setuserData] = useState({ ...initialdata })
@@ -84,23 +79,20 @@ function SignUp() {
     }
     const submit = (e) => {
         e.preventDefault()
+        console.log("userData",userData)
         if (ValidateEmail(userData.email) && checkpassword(userData.password)) {
-            axios.post(`http://localhost:3000/users`, {
-                username: userData.username,
+            axios.post(`http://localhost:8000/user/signup`, {
+                name: userData.username,
                 password: userData.password,
                 email: userData.email,
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                address: userData.address,
-                city: userData.city,
-                country: userData.country,
-                about: userData.about
+                contactnumber: userData.phoneno,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
                 .then(res => {
-                    if (res.status === 201) {
-                        toast.success("Registered successfully")
-                        history.push("/")
-                    }
+                    console.log("res===== SQL>",res)
                 }).catch((err) => {
                     toast.error("something went wrong")
                 })
@@ -117,20 +109,21 @@ function SignUp() {
         });
     }, [])
     return (
-
+        <div className="auth-wrapper ">
+        <div className="auth-inner">
         <Form onSubmit={e => submit(e)}>
             <div className='d-flex justify-content-center'>
 
                 <Col md="8 mt-5">
-                    <Card>
-                        <CardHeader>
-                            <h2 className="title fs-12">Wings Wech solutions</h2>
-                        </CardHeader>
-                        <CardBody>
+             
+                        <div>
+                            <h2 className="title fs-12">Travel Nation</h2>
+                        </div>
+                    
                             <Row>
-                                <Col className="pr-md-1" md="6">
+                                <Col className="p-md-1" md="12">
                                     <FormGroup>
-                                        <label>Username</label>
+                                        <label style={{color:"white"}}>Username</label>
                                         <Input
                                             placeholder="Username"
                                             type="text"
@@ -138,9 +131,9 @@ function SignUp() {
                                         />
                                     </FormGroup>
                                 </Col>
-                                <Col className="pl-md-1" md="6">
+                                <Col className="p-md-1" md="12">
                                     <FormGroup>
-                                        <label htmlFor="exampleInputEmail1">
+                                        <label style={{color:"white"}} htmlFor="exampleInputEmail1">
                                             Email address
                                         </label>
                                         <Input
@@ -153,31 +146,20 @@ function SignUp() {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col className="pr-md-1" md="4">
+                                <Col className="px-md-1" md="12">
                                     <FormGroup>
-                                        <label>First Name</label>
+                                        <label style={{color:"white"}}>Phone number</label>
                                         <Input
-                                            placeholder="First Name"
-                                            type="text"
-                                            onChange={(e) => { setuserData({ ...userData, firstName: e.target.value }) }}
+                                            placeholder="Phone no"
+                                            type="number"
+                                            onChange={(e) => { setuserData({ ...userData, phoneno: e.target.value }) }}
 
                                         />
                                     </FormGroup>
                                 </Col>
-                                <Col className="px-md-1" md="4">
+                                <Col className="pl-md-1" md="12">
                                     <FormGroup>
-                                        <label>Last Name</label>
-                                        <Input
-                                            placeholder="Last Name"
-                                            type="text"
-                                            onChange={(e) => { setuserData({ ...userData, lastName: e.target.value }) }}
-
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="pl-md-1" md="4">
-                                    <FormGroup>
-                                        <label>Password</label>
+                                        <label style={{color:"white"}}>Password</label>
                                         <div className='d-flex'>
 
                                             <Input
@@ -195,68 +177,22 @@ function SignUp() {
                                     </FormGroup>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col md="12">
-                                    <FormGroup>
-                                        <label>Address</label>
-                                        <Input
-                                            placeholder="Home Address"
-                                            type="text"
-                                            onChange={(e) => { setuserData({ ...userData, address: e.target.value }) }}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className="pr-md-1" md="6">
-                                    <FormGroup>
-                                        <label>City</label>
-                                        <Input
-                                            placeholder="City"
-                                            type="text"
-                                            onChange={(e) => { setuserData({ ...userData, city: e.target.value }) }}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col className="pl-md-1" md="6">
-                                    <FormGroup>
-                                        <label>Country</label>
-                                        <Input
-                                            placeholder="Country"
-                                            type="text"
-                                            onChange={(e) => { setuserData({ ...userData, country: e.target.value }) }}
-                                        />
-                                    </FormGroup>
-                                </Col>
-
-                            </Row>
-                            <Row>
-                                <Col md="12">
-                                    <FormGroup>
-                                        <label>About Me</label>
-                                        <Input
-                                            cols="80"
-                                            placeholder="Here can be your description"
-                                            rows="4"
-                                            onChange={(e) => { setuserData({ ...userData, about: e.target.value }) }}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                        </CardBody>
-                        <CardFooter>
+                     
+                        <div>
                             <p className="forgot-password text-right">
                                 Already registered ?  <a href="/">Login</a>
                             </p>
-                            <Button className="btn-fill" color="primary" type="submit" name="save" >
+                            <Button className="btn-fill submitbtn" color="primary" type="submit" name="save" >
                                 <a />
-                                Sign Up
+                             Register
                             </Button>
-                        </CardFooter>
-                    </Card>
+                        </div>
+                    
                 </Col>
             </div>
         </Form>
+        </div>
+        </div>
     )
 }
 export default SignUp

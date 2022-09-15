@@ -149,6 +149,7 @@ export default function Todo() {
                 if (res.status === 200) {
                     toast.success("task Completed");
                     showTaskk()
+                    setCheck(false)
                     document.getElementById(item.id).checked = false
                     // setcompletedtodo([])
                 }

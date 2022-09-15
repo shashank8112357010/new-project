@@ -16,20 +16,13 @@ export default function Login(props) {
     const loginSubmit = (e) => {
 
         e.preventDefault()
-        axios.get(`http://localhost:3000/users`).then((res) => {
-            var user = res?.data.find(function (item) {
-                if (item.email == email && item.password == password) {
-                    return true
-                }
-            })
-            if (user) {
-                localStorage.setItem("token", user.id)
-                localStorage.setItem("auth", true);
-                history.replace('/admin/dashboard')
-                toast.success("Login successfull");
-            } else {
-                toast.error("Invalid credentials")
-            }
+        axios.post(`http://localhost:8000/user/login`,{
+            email : email ,
+            password:password
+        }, { headers: {
+            'Content-Type': 'application/json'
+        }} ).then((res) => {
+         console.log(res,"<===============response from login")
         })
     }
 
@@ -43,14 +36,14 @@ useEffect(()=>{
 },[])
 
     return (
-        <div>
-            <div className="App ">
-                <div className="auth-wrapper">
+  
+                <div className="auth-wrapper ">
                     <div className="auth-inner">
+                    <h1 style={{fontWeight:"bolder"}} className="mb-5">Travel Nation</h1>
                         <form onSubmit={e => loginSubmit(e)}>
-                            <h3>Sign In</h3>
+                            <h3 style={{fontWeight:"bolder"}} >Login</h3>
                             <div className="mb-3">
-                                <label>Email address</label>
+                                <label style={{color:"white"}}>Email address</label>
                                 <input
                                     type="email"
                                     className="form-control"
@@ -59,7 +52,7 @@ useEffect(()=>{
                                 />
                             </div>
                             <div className="mb-3">
-                                <label>Password</label>
+                                <label style={{color:"white"}}>Password</label>
                                 <div className="d-flex">
                                     <input
                                         id="id_password"
@@ -73,17 +66,19 @@ useEffect(()=>{
 
                             </div>
                             <p className="forgot-password text-right">
-                                Don't have account  <a href="/register">register?</a>
+                                <a href="/forgetpassword">Forget Password ? </a>
                             </p>
                             <div className="d-grid">
-                                <button type="submit" className="btn btn-primary">
-                                    Submit
+                                <button type="submit" className="btn btn-primary submitbtn">
+                                Login
                                 </button>
+                            <p className="forgot-password text-center">
+                                Don't have account  <a href="/register">register?</a>
+                            </p>
                             </div>
                         </form>
                     </div>
-                </div>
             </div>
-        </div>
+  
     )
 }

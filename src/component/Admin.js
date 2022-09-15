@@ -3,7 +3,6 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "./AdminNavbar";
 import Footer from "./Footer.js";
-import Sidebar from "./Sidebar.js";
 import { useHistory } from 'react-router-dom';
 import routes from "./Routes.js";
 import logo from "../assets/img/react-logo.png"
@@ -92,15 +91,7 @@ function Admin() {
         {({ color, changeColor }) => (
           <React.Fragment>
             <div className="wrapper">
-              <Sidebar
-                routes={routes}
-                logo={{
-                  outterLink: "https://www.creative-tim.com/",
-                  text: "Creative Tim",
-                  imgSrc: logo
-                }}
-                toggleSidebar={toggleSidebar}
-              />
+            
               <div className="main-panel" ref={mainPanelRef} data={color}>
                 <AdminNavbar
                   brandText={getBrandText(location.pathname)}

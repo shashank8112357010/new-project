@@ -5,7 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+   background-position-y: center;
+   background-repeat: no-repeat;
+   background-position-x: center;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -14,11 +18,8 @@ code {
 .auth-wrapper{
   position: absolute;
   top: 50%;
-  border: 5px solid transparent;
   padding: 10px;
   text-align: center !important;
-  border: 3px solid;
-  border-radius: 20px;
   transform: translate(-50% , -50%);
   left: 50%;
 
@@ -55,4 +56,19 @@ code {
 }
 .pending{
   color: yellow !important;;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white!important;
+  opacity: 0.5; /* Firefox */
+}
+.submitbtn{
+  width: 250px;
+}
+.submitbtn:hover{
+  width: 150px;
+}
+
+.bg-image{
+  background-image: url('../src/assets/img/daniel-leone-g30P1zcOzXo-unsplash.jpg')!important;
+
 }
